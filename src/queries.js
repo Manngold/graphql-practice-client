@@ -1,13 +1,31 @@
-import gql from "graphql-tag"; //write graphql on front-end
+import gql from "graphql-tag";
 
 export const HOME_PAGE = gql`
-    {
-        movies(limit: 50, rating: 7) {
-            id
-            title
-            genres
-            rating
-        }
+  {
+    movies(limit: 20, rating: 9) {
+      id
+      title
+      rating
+      medium_cover_image
     }
-`
-//대부분 query라서 query 생략 가능 mutation은 써줘야함
+  }
+`;
+
+export const MOVIE_DETAILS = gql`
+  query getMovieDetails($movieId: Int!) {
+    movie(id: $movieId) {
+      medium_cover_image
+      title
+      rating
+      description_intro
+      language
+      genres
+    }
+    suggestions(id: $movieId) {
+      id
+      title
+      rating
+      medium_cover_image
+    }
+  }
+`;
